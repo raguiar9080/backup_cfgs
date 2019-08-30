@@ -1,0 +1,71 @@
+# open terminal, blazingly fast compared to iTerm/Hyper
+#cmd - return : /Users/rubenaguiar/newTerminal.sh ~
+cmd - return : open -a Terminal ~
+cmd - e : open ~
+cmd - q : chunkc tiling::window --close
+cmd - n : osascript -e "set volume output volume (output volume of (get volume settings) - 5) --100%"
+cmd - m : osascript -e "set volume output volume (output volume of (get volume settings) + 5) --100%"
+
+# focus window
+cmd - left : chunkc tiling::window --focus west
+cmd - right : chunkc tiling::window --focus east
+cmd - up : chunkc tiling::window --focus north
+cmd - down : chunkc tiling::window --focus south
+
+# general commands
+shift + cmd - r : chunkc tiling::desktop --equalize
+shift + cmd - a : chunkc tiling::desktop --layout bsp
+shift + cmd - s : chunkc tiling::desktop --layout monocle
+shift + cmd - d : chunkc tiling::desktop --layout float
+shift + cmd - e : chunkc tiling:::desktop --rotate 90
+
+
+# swap window
+shift + cmd - left : chunkc tiling::window --swap west
+shift + cmd - down : chunkc tiling::window --swap south
+shift + cmd - up : chunkc tiling::window --swap north
+shift + cmd - right : chunkc tiling::window --swap east
+
+# make floating window fill screen
+shift + cmd + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+
+# make floating window fill left-half of screen
+shift + cmd + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+
+# make floating window fill right-half of screen
+shift + cmd + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+
+# fast focus desktop
+cmd - 1 : chunkc tiling::desktop -f 1; chunkc tiling::desktop -f 11; chunkc tiling::monitor -f 1
+cmd - 2 : chunkc tiling::desktop -f 2; chunkc tiling::desktop -f 12; chunkc tiling::monitor -f 1
+cmd - 3 : chunkc tiling::desktop -f 3; chunkc tiling::desktop -f 13; chunkc tiling::monitor -f 1
+cmd - 4 : chunkc tiling::desktop -f 4; chunkc tiling::desktop -f 14; chunkc tiling::monitor -f 1
+cmd - 5 : chunkc tiling::desktop -f 5; chunkc tiling::desktop -f 15; chunkc tiling::monitor -f 1
+cmd - 6 : chunkc tiling::desktop -f 6; chunkc tiling::desktop -f 16; chunkc tiling::monitor -f 1
+cmd - 7 : chunkc tiling::desktop -f 7; chunkc tiling::desktop -f 17; chunkc tiling::monitor -f 1
+cmd - 8 : chunkc tiling::desktop -f 8; chunkc tiling::desktop -f 18; chunkc tiling::monitor -f 1
+cmd - 9 : chunkc tiling::desktop -f 9; chunkc tiling::desktop -f 19; chunkc tiling::monitor -f 1
+
+# send window to desktop and follow focus
+shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1; chunkc tiling::desktop -f 1; chunkc tiling::desktop -f 11; chunkc tiling::monitor -f 1
+shift + cmd - 2 : chunkc tiling::window --send-to-desktop 2; chunkc tiling::desktop -f 2; chunkc tiling::desktop -f 12; chunkc tiling::monitor -f 1
+shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3; chunkc tiling::desktop -f 3; chunkc tiling::desktop -f 13; chunkc tiling::monitor -f 1
+shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4; chunkc tiling::desktop -f 4; chunkc tiling::desktop -f 14; chunkc tiling::monitor -f 1
+shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5; chunkc tiling::desktop -f 5; chunkc tiling::desktop -f 15; chunkc tiling::monitor -f 1
+shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6; chunkc tiling::desktop -f 6; chunkc tiling::desktop -f 16; chunkc tiling::monitor -f 1
+shift + cmd - 7 : chunkc tiling::window --send-to-desktop 7; chunkc tiling::desktop -f 7; chunkc tiling::desktop -f 17; chunkc tiling::monitor -f 1
+shift + cmd - 8 : chunkc tiling::window --send-to-desktop 8; chunkc tiling::desktop -f 8; chunkc tiling::desktop -f 18; chunkc tiling::monitor -f 1
+shift + cmd - 9 : chunkc tiling::window --send-to-desktop 9; chunkc tiling::desktop -f 9; chunkc tiling::desktop -f 19; chunkc tiling::monitor -f 1
+
+
+shift + cmd + alt - 1 : chunkc tiling::window --send-to-desktop 11; chunkc tiling::desktop -f 1; chunkc tiling::desktop -f 11; chunkc tiling::monitor -f 2
+shift + cmd + alt - 2 : chunkc tiling::window --send-to-desktop 12; chunkc tiling::desktop -f 2; chunkc tiling::desktop -f 12; chunkc tiling::monitor -f 2
+shift + cmd + alt - 3 : chunkc tiling::window --send-to-desktop 13; chunkc tiling::desktop -f 3; chunkc tiling::desktop -f 13; chunkc tiling::monitor -f 2
+shift + cmd + alt - 4 : chunkc tiling::window --send-to-desktop 14; chunkc tiling::desktop -f 4; chunkc tiling::desktop -f 14; chunkc tiling::monitor -f 2
+shift + cmd + alt - 5 : chunkc tiling::window --send-to-desktop 15; chunkc tiling::desktop -f 5; chunkc tiling::desktop -f 15; chunkc tiling::monitor -f 2
+shift + cmd + alt - 6 : chunkc tiling::window --send-to-desktop 16; chunkc tiling::desktop -f 6; chunkc tiling::desktop -f 16; chunkc tiling::monitor -f 2
+shift + cmd + alt - 7 : chunkc tiling::window --send-to-desktop 17; chunkc tiling::desktop -f 7; chunkc tiling::desktop -f 17; chunkc tiling::monitor -f 2
+shift + cmd + alt - 8 : chunkc tiling::window --send-to-desktop 18; chunkc tiling::desktop -f 8; chunkc tiling::desktop -f 18; chunkc tiling::monitor -f 2
+shift + cmd + alt - 9 : chunkc tiling::window --send-to-desktop 19; chunkc tiling::desktop -f 9; chunkc tiling::desktop -f 19; chunkc tiling::monitor -f 2
+
+cmd + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
