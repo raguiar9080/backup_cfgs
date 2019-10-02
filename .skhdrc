@@ -5,6 +5,7 @@ cmd - e : open ~
 cmd - q : chunkc tiling::window --close
 cmd - n : osascript -e "set volume output volume (output volume of (get volume settings) - 5) --100%"
 cmd - m : osascript -e "set volume output volume (output volume of (get volume settings) + 5) --100%"
+cmd - b : osascript -e "set volume output volume 0 --100%"
 
 # focus window
 cmd - left : chunkc tiling::window --focus west
