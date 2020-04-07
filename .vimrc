@@ -166,7 +166,12 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " Delete on buffer close if empty and last
 autocmd BufDelete * if len(filter(range(1, bufnr('$')), 'empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
 
-" ----------------------------------------KEYBOARD SHORTCUTS-------------------------------------------
+" --------------------------------------------PERFORMANCE--------------------------------------------
+set timeoutlen=1000
+set ttimeoutlen=0
+"set maptimeout=0
+
+" ----------------------------------------KEYBOARD SHORTCUTS-----------------------------------------
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>

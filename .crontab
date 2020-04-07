@@ -1,0 +1,2 @@
+MAILTO=""
+0 4 * * * cd ~/work && ctags -R .
