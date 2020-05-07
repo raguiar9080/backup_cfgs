@@ -25,13 +25,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 
 " language support
-Plug 'elixir-lang/vim-elixir'
+"Plug 'elixir-lang/vim-elixir'
 Plug 'derekwyatt/vim-scala'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
 " Configuration for vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
+"au! Syntax scala source ~/.vim/syntax/scala.vim
 
 " fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
@@ -81,12 +82,12 @@ set laststatus=2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_dotfiles = 0
-let g:ctrlp_match_window = 'results:5' " overcome limit imposed by max height
+let g:ctrlp_match_window = 'results:3' " overcome limit imposed by max height
 let g:ctrlp_use_caching = 0 " enable caching
 "let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrl_max_files = 10000
-let g:ctrlp_mruf_max = 5 " number of recently opened files
+let g:ctrlp_mruf_max = 3 " number of recently opened files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = '\v[\/](bloop|metals|node_modules|target|dist|tmp|log)|(\.(bloop|swp|ico|git|svn|xml))$'
 let g:ctrlp_max_depth = 10
@@ -161,7 +162,7 @@ autocmd BufWinLeave * call clearmatches()
 " Metals comment highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" --------------------------------------------HIGHLIGHTING-------------------------------------------
+" --------------------------------------------OTHER-------------------------------------------
 
 " Delete on buffer close if empty and last
 autocmd BufDelete * if len(filter(range(1, bufnr('$')), 'empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
@@ -170,6 +171,19 @@ autocmd BufDelete * if len(filter(range(1, bufnr('$')), 'empty(bufname(v:val)) &
 set timeoutlen=1000
 set ttimeoutlen=0
 "set maptimeout=0
+
+" make Esc happen without waiting for timeoutlen
+" fixes Powerline delay
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+augroup END
+set ttyfast
+set lazyredraw
+let g:airline_highlighting_cache=1
+set norelativenumber
+set re=1
 
 " ----------------------------------------KEYBOARD SHORTCUTS-----------------------------------------
 " Use tab for trigger completion with characters ahead and navigate.
@@ -218,7 +232,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)

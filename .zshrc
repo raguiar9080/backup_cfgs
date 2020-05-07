@@ -114,3 +114,5 @@ setopt no_share_history
 unsetopt SHARE_HISTORY
 
 prompt_context() {}
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
