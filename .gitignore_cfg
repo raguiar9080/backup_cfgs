@@ -1,0 +1,19 @@
+# Vagrant
+/.vagrant
+Vagrantfile.local
+*.rdb
+*.log
+log
+target
+*.deb
+.byebug_history
+npm-debug.log
+webpack-stats.json
+apidocs/
+.idea
+*.iml
+.bloop
+.metals
+project/project/
+**/.bsp
+draft*
