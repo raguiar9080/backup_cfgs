@@ -1,17 +1,15 @@
 [core]
   autocrlf = input
-
 [user]
 	name = Ruben Aguiar
-	email = ruben@triggerise.org
-	username = raguiar9800
-
+  email = r.aguiar9080@gmail.com
+  username = raguiar9080
 [core]
-	editor = vim
-	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = vim
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+[pull]
+    rebase = true
+
+# commit -v
+# status -s

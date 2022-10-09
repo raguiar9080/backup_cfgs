@@ -116,3 +116,12 @@ unsetopt SHARE_HISTORY
 prompt_context() {}
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Python 3
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Created by `pipx` on 2022-03-02 12:00:59
+export PATH="$PATH:/Users/rubenaguiar/.local/bin"
+
+export PATH="$HOME/.poetry/bin:$PATH"
