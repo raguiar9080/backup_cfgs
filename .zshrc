@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/rubenaguiar/.oh-my-zsh"
+export ZSH="/home/fractalman/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	fzf
+	git
+	history-substring-search
+        colored-man-pages
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+        zsh-z
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,20 +116,77 @@ export LC_ALL=en_US.UTF-8
 #prompt pure
 
 #source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.bash_profile
 unsetopt share_history
 setopt no_share_history
 unsetopt SHARE_HISTORY
 
 prompt_context() {}
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/fractalman/.zshrc'
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
-# Python 3
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# CUSTOM STUFF
+eval `ssh-agent` &>/dev/null
+export FZF_DEFAULT_COMMAND="fdfind --hidden --exclude '.git' --exclude 'node_modules'"
+# CTRL-T's command
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+export FZF_DEFAULT_OPTS="
+	--layout=reverse
+	--inline-info
+	--height=80%
+	--multi
+	--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+	--color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+	--prompt='∼ ' --pointer='▶' --marker='✓'
+"
 
-# Created by `pipx` on 2022-03-02 12:00:59
-export PATH="$PATH:/Users/rubenaguiar/.local/bin"
+# find-in-file - usage: fif <SEARCH_TERM>
+fif() {
+  if [ ! "$#" -gt 0 ]; then
+    echo "Need a string to search for!";
+    return 1;
+  fi
+  rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# Select a docker container to start and attach to
+function dockerAttach() {
+  local cid
+  cid=$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker start "$cid" && docker attach "$cid"
+}
+
+# Select a running docker container to stop
+function dockerStop() {
+  local cid
+  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker stop "$cid"
+}
+
+# Select a docker container to remove
+function dockerRemove() {
+  local cid
+  cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker rm "$cid"
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+alias op='xdg-open'
+alias cls='printf "\033c"'
