@@ -1,12 +1,18 @@
-// vim:    ~/.vim/coc-settings.json
-// neovim: ~/.config/nvim/coc-settings.json
 {
-  "coc.preferences.formatOnSaveFiletypes": ["scala"],
-  "languageserver": {
-    "metals": {
-      "command": "metals-vim",
-      "rootPatterns": ["build.sbt"],
-      "filetypes": ["scala", "sbt"]
-    }
-  }
+  "eslint.run": "onType",
+  "eslint.format.enable": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "prettier.disableSuccessMessage": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "css",
+    "markdown"
+  ],
+  "coc.preferences.useQuickfixForLocations": true,
+  "tsserver.formatOnType": true
 }
