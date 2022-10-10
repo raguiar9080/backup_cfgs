@@ -26,8 +26,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 
 " LANGUAGE SUPPORT
-" Plug 'elixir-lang/vim-elixir'
-" Plug 'derekwyatt/vim-scala'
+Plug 'elixir-lang/vim-elixir'
+Plug 'derekwyatt/vim-scala'
 " Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'    " JavaScript support
@@ -47,11 +47,13 @@ Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-prettier'
 
 " FUZZY SEARCH & tags
-"Plug 'craigemery/vim-autotag'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'craigemery/vim-autotag'
+" Plug 'ctrlpvim/ctrlp.vim'
 
 " FILE EXPLORER
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Add plugins to &runtimepath
 " All of your Plugs must be added before the following line
@@ -86,18 +88,18 @@ set tagfunc=CocTagFunc " NOT WORKING? Tag mechanism using coc
 
 " --------------------------------------------SEARCH-------------------------------------------
 
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_show_hidden = 0
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_match_window = 'results:5' " overcome limit imposed by max height
-let g:ctrlp_use_caching = 0 " disable caching
-"let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-"let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrl_max_files = 10000
-let g:ctrlp_mruf_max = 5 " number of recently opened files
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_custom_ignore = '\v[\/](bloop|metals|node_modules|target|dist|tmp|log)|(\.(bloop|swp|ico|git|svn|xml))$'
-let g:ctrlp_max_depth = 10
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_show_hidden = 0
+" let g:ctrlp_dotfiles = 0
+" let g:ctrlp_match_window = 'results:5' " overcome limit imposed by max height
+" let g:ctrlp_use_caching = 0 " disable caching
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_clear_cache_on_exit = 0
+" let g:ctrl_max_files = 10000
+" let g:ctrlp_mruf_max = 5 " number of recently opened files
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_custom_ignore = '\v[\/](bloop|metals|node_modules|target|dist|tmp|log)|(\.(bloop|swp|ico|git|svn|xml))$'
+" let g:ctrlp_max_depth = 10
 
 "open in new tab
 "let g:ctrlp_prompt_mappings = {
@@ -139,8 +141,8 @@ let g:airline_section_z = '%p%%%#__accent_bold#%{g:airline_symbols.linenr}%l%#__
 
 " --------------------------------------------EXPLORER-------------------------------------------
 
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_banner = 0
 
 " --------------------------------------------DEBUGGER-------------------------------------------
 
@@ -213,17 +215,17 @@ set re=1
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    " inoremap <silent><expr> <TAB>
+    "       \ pumvisible() ? "\<C-n>" :
+    "       \ <SID>check_back_space() ? "\<TAB>" :
+    "       \ coc#refresh()
+    " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    " Used in the tab autocompletion for coc
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+    " " Used in the tab autocompletion for coc
+    " function! s:check_back_space() abort
+    "   let col = col('.') - 1
+    "   return !col || getline('.')[col - 1]  =~# '\s'
+    " endfunction
 
     " Use <c-space> to trigger completion.
     inoremap <silent><expr> <c-space> coc#refresh()
@@ -349,9 +351,9 @@ cnoreabbrev q bd
 "map <C-l> :<C-u>execute :normal! len(getqflist()) :cn@a<CR><CR>
 " https://stackoverflow.com/questions/1747091/how-do-you-use-vims-quickfix-feature
 " http://vimdoc.sourceforge.net/htmldoc/quickfix.html
-map <C-h> :cn<CR>:cp<CR>@a:cn<CR>
-map <C-j> :cp<CR>
-map <C-k> :cn<CR>
+map <C-p> :GFiles<CR>
+map <C-o> :Files<CR>
+map <C-f> :Rg<CR>
 augroup vimrcQfClose
     autocmd!
     autocmd FileType qf if mapcheck('<esc>', 'n') ==# '' | nnoremap <buffer><silent> <esc> :cclose<bar>lclose<CR> | endif
@@ -363,6 +365,6 @@ augroup END
 "imap <C-l> <ESC>oprintln(s"${}")<left><left><left><left><left>
 
 " console.log made easy
-xnoremap <C-l> y<Esc>oconsole.log(`####  ####: ${JSON.stringify(<Esc>pA)}`)<Esc>I<C-Right><Esc><right><right><right><right><right><right><right><right><right><right><right><right>i
+xnoremap <C-l> y<Esc>oconsole.log(`####  ####: ${JSON.stringify(<Esc>pA, null, 2)}`)<Esc>I<C-Right><Esc><right><right><right><right><right><right><right><right><right><right><right><right>i
 inoremap <C-l> <Esc>oconsole.log(`#### :${JSON.stringify()}`)<left><left><left><left>
-nnoremap <C-l> deP<Esc>oconsole.log(`#### <Esc>pA ####: ${JSON.stringify(<Esc>pA)}`)<Esc>I<Esc>
+nnoremap <C-l> deP<Esc>oconsole.log(`#### <Esc>pA ####: ${JSON.stringify(<Esc>pA, null, 2)}`)<Esc>I<Esc>
