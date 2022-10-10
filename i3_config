@@ -11,7 +11,7 @@
 
 # #---Starting External Scripts---# #
 
-# --------------------- UTILITIES --------------------- 
+# --------------------- UTILITIES ---------------------
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -36,16 +36,16 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# --------------------- STARTUP --------------------- 
+# --------------------- STARTUP ---------------------
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wall.jpg
 
-# --------------------- SETTINGS --------------------- 
+# --------------------- SETTINGS ---------------------
 set $mod Mod4
 set $mod1 Mod1
 focus_follows_mouse no
 focus_wrapping no
 
-# --------------------- CUSTOM CONTROLS --------------------- 
+# --------------------- CUSTOM CONTROLS ---------------------
 bindsym $mod+n exec --no-startup-id amixer -D pulse sset Master 5%-
 bindsym $mod+m exec --no-startup-id amixer -D pulse sset Master 5%+
 bindsym $mod+b exec --no-startup-id amixer -D pulse set Master 1+ toggle
@@ -62,23 +62,23 @@ bindsym $mod+Shift+u reload
 bindsym $mod+Shift+i restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Do you want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# --------------------- MACOS LIKE BUTTONS --------------------- 
-bindsym --release $mod+c exec --no-startup-id xdotool key --clearmodifiers ctrl+c
-bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers ctrl+v
-bindsym --release $mod+Shift+c exec --no-startup-id xdotool key --clearmodifiers ctrl+Shift+c
-bindsym --release $mod+Shift+v exec --no-startup-id xdotool key --clearmodifiers ctrl+Shift+v
-bindsym --release $mod+a exec --no-startup-id xdotool key --clearmodifiers ctrl+a
-bindsym --release $mod+y exec --no-startup-id xdotool key --clearmodifiers ctrl+y
-bindsym --release $mod+z exec --no-startup-id xdotool key --clearmodifiers ctrl+z
-bindsym --release $mod+w exec --no-startup-id xdotool key --clearmodifiers ctrl+w
-bindsym --release $mod+r exec --no-startup-id xdotool key --clearmodifiers ctrl+r
-bindsym --release $mod+f exec --no-startup-id xdotool key --clearmodifiers ctrl+f
-bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t
+# --------------------- MACOS LIKE BUTTONS ---------------------
+bindsym --release $mod+c exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+c
+bindsym --release $mod+v exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+v
+bindsym --release $mod+Shift+c exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+Shift+c
+bindsym --release $mod+Shift+v exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+Shift+v
+bindsym --release $mod+a exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+a
+bindsym --release $mod+y exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+y
+bindsym --release $mod+z exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+z
+bindsym --release $mod+w exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+w
+bindsym --release $mod+r exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+r
+bindsym --release $mod+f exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+f
+bindsym --release $mod+t exec --no-startup-id /home/fractalman/xdotool_hack.sh key --clearmodifiers ctrl+t
 
-# --------------------- APPEARANCE --------------------- 
+# --------------------- APPEARANCE ---------------------
 # Take out window borders
-new_window pixel 4 
-hide_edge_borders horizontal 
+new_window pixel 4
+hide_edge_borders horizontal
 for_window [class="^.*"] border pixel 3
 
 # class                 border  backgr. text    indicator
@@ -101,7 +101,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# --------------------- NAVIGATION --------------------- 
+# --------------------- NAVIGATION ---------------------
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -167,6 +167,12 @@ bindsym $mod+Shift+e mode "resize"
 # finds out, if available)
 bar {
     position top
-    font pango:Monospace
+    font pango:Monospace 10
     status_command i3status -c /home/fractalman/.config/i3status/i3status.conf
+    tray_output DP-0
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #ffa8a8
+    }
 }
